@@ -1,6 +1,7 @@
 let arenaColor;
 let playerScore;
 let aiScore;
+let ball;
 
 function setup() {
   createCanvas(1920, 1080);
@@ -8,6 +9,7 @@ function setup() {
   arenaColor = color(255, 255, 255, 100);
   playerScore = new Score(createVector(10, 65));
   aiScore = new Score(createVector(width - 50, 65));
+  ball = new Ball();
 }
 
 function draw() {
@@ -16,6 +18,7 @@ function draw() {
   drawArena();
   playerScore.render();
   aiScore.render();
+  ball.render();
 }
 
 function drawArena() {
