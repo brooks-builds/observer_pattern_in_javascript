@@ -1,7 +1,7 @@
 let arenaColor;
 let playerScore;
 let aiScore;
-let ball;
+let balls;
 
 function setup() {
   createCanvas(1920, 1080);
@@ -9,16 +9,18 @@ function setup() {
   arenaColor = color(255, 255, 255, 100);
   playerScore = new Score(createVector(10, 65));
   aiScore = new Score(createVector(width - 50, 65));
-  ball = new Ball();
+  balls = [new Ball()];
 }
 
 function draw() {
-  background(0);
+  balls.forEach((ball) => ball.update());
+  // addBall();
 
+  background(0);
   drawArena();
   playerScore.render();
   aiScore.render();
-  ball.render();
+  balls.forEach((ball) => ball.render());
 }
 
 function drawArena() {
@@ -29,4 +31,10 @@ function drawArena() {
   stroke(arenaColor);
   strokeWeight(5);
   rect(0, 0, width, height);
+}
+
+function addBall() {
+  if (random() > 0.9) {
+    balls.push(new Ball());
+  }
 }
