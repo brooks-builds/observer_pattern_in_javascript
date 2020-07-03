@@ -11,4 +11,8 @@ class Score {
     fill(this.color);
     text(this.score, this.location.x, this.location.y);
   }
+
+  increment() {
+    this.score += 1;
+  }
 }

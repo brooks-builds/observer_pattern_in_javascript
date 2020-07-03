@@ -13,8 +13,8 @@ function setup() {
 }
 
 function draw() {
-  balls.forEach((ball) => ball.update());
-  // addBall();
+  balls.forEach((ball) => ball.update(playerScore, aiScore));
+  addBall();
 
   background(0);
   drawArena();

@@ -15,12 +15,12 @@ class Ball {
     ellipse(this.location.x, this.location.y, this.diameter);
   }
 
-  update() {
+  update(playerScore, aiScore) {
     this.location.add(this.velocity);
-    this.bounce();
+    this.bounce(playerScore, aiScore);
   }
 
-  bounce() {
+  bounce(playerScore, aiScore) {
     if (this.location.y - this.diameter / 2 <= 0) {
       this.reverseVelocity("y");
     } else if (this.location.y + this.diameter / 2 >= height) {
@@ -29,8 +29,10 @@ class Ball {
 
     if (this.location.x - this.diameter / 2 <= 0) {
       this.reverseVelocity("x");
+      aiScore.increment();
     } else if (this.location.x + this.diameter / 2 >= width) {
       this.reverseVelocity("x");
+      playerScore.increment();
     }
   }
 
