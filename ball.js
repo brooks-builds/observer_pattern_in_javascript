@@ -1,5 +1,5 @@
 class Ball {
-  constructor() {
+  constructor(playerScoredEvent, aiScoredEvent) {
     this.location = createVector(width / 2, height / 2);
     this.color = color(255);
     this.diameter = 30;
@@ -7,6 +7,8 @@ class Ball {
     this.velocity = createVector(random(-1, 1), random(-1, 1));
     this.velocity.normalize();
     this.velocity.mult(this.speed);
+    this.playerScoredEvent = playerScoredEvent;
+    this.aiScoredEvent = aiScoredEvent;
   }
 
   render() {
@@ -29,8 +31,10 @@ class Ball {
 
     if (this.location.x - this.diameter / 2 <= 0) {
       this.reverseVelocity("x");
+      this.aiScoredEvent.notify();
     } else if (this.location.x + this.diameter / 2 >= width) {
       this.reverseVelocity("x");
+      this.playerScoredEvent.notify();
     }
   }
 
