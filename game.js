@@ -1,20 +1,25 @@
+const EVENT_AI_SCORED = "ai scored";
+const EVENT_PLAYER_SCORED = "player scored";
+
 let arenaColor;
 let playerScore;
 let aiScore;
 let balls;
+let observerSystem;
 
 function setup() {
   createCanvas(1920, 1080);
 
+  observerSystem = new ObserverSystem();
   arenaColor = color(255, 255, 255, 100);
-  playerScore = new Score(createVector(10, 65));
-  aiScore = new Score(createVector(width - 50, 65));
+  playerScore = new Score(createVector(10, 65), observerSystem);
+  aiScore = new Score(createVector(width - 50, 65), observerSystem, "ai");
   balls = [new Ball()];
 }
 
 function draw() {
-  balls.forEach((ball) => ball.update());
-  // addBall();
+  balls.forEach((ball) => ball.update(observerSystem));
+  addBall();
 
   background(0);
   drawArena();
