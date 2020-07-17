@@ -15,9 +15,9 @@ class Ball {
     ellipse(this.location.x, this.location.y, this.diameter);
   }
 
-  update() {
+  update(aiScoredEvent, playerScoredEvent) {
     this.location.add(this.velocity);
-    this.bounce();
+    this.bounce(aiScoredEvent, playerScoredEvent);
   }
 
   bounce() {
@@ -29,8 +29,10 @@ class Ball {
 
     if (this.location.x - this.diameter / 2 <= 0) {
       this.reverseVelocity("x");
+      aiScoredEvent.notify();
     } else if (this.location.x + this.diameter / 2 >= width) {
       this.reverseVelocity("x");
+      playerScoredEvent.notify();
     }
   }
 
